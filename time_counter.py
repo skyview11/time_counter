@@ -8,6 +8,10 @@ class TimeCounter:
         self.record_past = record_past
         self.n_record = n_record
         self.id = 0
+    def make_ckpt(self, name):
+        assert name not in self.count_ckpts.keys(), "Duplicated name!"
+        self.count_ckpts[name] = [self.id, -1]
+        
     def record_start(self, name, make_new=False):
         if name in self.count_ckpts.keys():
             self.count_ckpts[name][1] = time.time()
@@ -18,6 +22,8 @@ class TimeCounter:
         else:
             raise RuntimeError
     def record_stop(self, name):
+        assert name in self.count_ckpts, "No matching checkpoint"
+        assert self.count_history[name][1] != -1, "Start the record first"
         if self.record_past:
             self.count_history[name].append(time.time()-self.count_ckpts[name][1])
             if len(self.count_history[name]) > self.n_record:

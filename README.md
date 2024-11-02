@@ -31,7 +31,8 @@ while True:
 counter.print_ckpt(mode="period")
 counter.save_history(path="example.json")
 ```
-#### `counter.record_start`: start record with name "ex1" you may stop the record by using the name defined here
+#### `counter.make_ckpt`: make new checkpoint
+#### `counter.record_start`: start record with name "ex1" you may stop the record by using the name defined here. Make new checkpoint if `make_new` option is true and no record has same name input 
 #### `counter.record_stop`: stop the record named "ex1"
 #### `counter.print_ckpt`: print all recorded time (started + stopped)
 #### `counter.save_history`: save the record history. Ths method can be used only when `record_past` option is true
